@@ -1,3 +1,4 @@
+import 'package:chat_app_by_supabase/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -17,10 +18,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'チャットアプリ',
-      home: Scaffold(), // TODO: 後ほど初期ページに変更
+      home: RegisterPage(),
     );
   }
 }
