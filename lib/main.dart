@@ -1,3 +1,4 @@
+import 'package:chat_app_by_supabase/ignore/secret.dart';
 import 'package:chat_app_by_supabase/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -7,8 +8,8 @@ Future<void> main() async {
 
   await Supabase.initialize(
     // TODO: ここにSupabaseのURLとAnon Keyを入力
-    url: 'SUPABASE_URL',
-    anonKey: 'SUPABASE_ANON_KEY',
+    url: supabaseURL,
+    anonKey: supabaseAnonKey,
   );
   runApp(const MyApp());
 }
