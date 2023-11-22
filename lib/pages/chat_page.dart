@@ -1,4 +1,5 @@
 import 'package:chat_app_by_supabase/model/message.dart';
+import 'package:chat_app_by_supabase/pages/register_page.dart';
 import 'package:chat_app_by_supabase/util/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,51 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('チャット'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              supabase.auth.signOut();
+              Navigator.of(context).pushAndRemoveUntil(RegisterPage.route(), (route) => false);
+            },
+            child: Text(
+              'ログアウト',
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+          )
+        ],
+      ),
+      body: StreamBuilder<List<Message>>(
+        stream: _messageStream,
+        builder: (context, snapShot) {
+          if (snapShot.hasData) {
+            final messages = snapShot.data!;
+            return Column(
+              children: [
+                Expanded(
+                  child: messages.isEmpty
+                      ? const Center(
+                          child: Text('早速メッセージを送ってみよう！'),
+                        )
+                      : ListView.builder(
+                          reverse: true, // 新しいメッセージが下に来るように表示順を上下逆にする
+                          itemCount: messages.length,
+                          itemBuilder: (context, index) {
+                            final message = messages[index];
+                            return Text(message.content);
+                          },
+                        ),
+                ),
+                // ここに後でメッセージ送信ウィジェットを追加
+              ],
+            );
+          } else {
+            return preloader;
+          }
+        },
+      ),
+    );
   }
 }
