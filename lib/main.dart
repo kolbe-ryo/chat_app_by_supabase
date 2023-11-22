@@ -1,5 +1,5 @@
 import 'package:chat_app_by_supabase/ignore/secret.dart';
-import 'package:chat_app_by_supabase/pages/register_page.dart';
+import 'package:chat_app_by_supabase/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -7,7 +7,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Supabase.initialize(
-    // TODO: ここにSupabaseのURLとAnon Keyを入力
     url: supabaseURL,
     anonKey: supabaseAnonKey,
   );
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'チャットアプリ',
-      home: RegisterPage(),
+      home: SplashPage(),
     );
   }
 }
