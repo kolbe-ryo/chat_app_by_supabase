@@ -84,3 +84,31 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 }
+
+class _MessageBar extends StatefulWidget {
+  const _MessageBar({super.key});
+
+  @override
+  State<_MessageBar> createState() => __MessageBarState();
+}
+
+class __MessageBarState extends State<_MessageBar> {
+  late final TextEditingController _textEditingController;
+
+  @override
+  void initState() {
+    _textEditingController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
