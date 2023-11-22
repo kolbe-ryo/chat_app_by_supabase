@@ -23,7 +23,7 @@ class _ChatPageState extends State<ChatPage> {
   void initState() {
     final userId = supabase.auth.currentUser!.id;
     _messageStream = supabase
-        .from('message')
+        .from(messageTableName)
         .stream(
           primaryKey: ['id'],
         )
