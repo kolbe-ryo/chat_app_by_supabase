@@ -86,7 +86,7 @@ class _ChatPageState extends State<ChatPage> {
 }
 
 class _MessageBar extends StatefulWidget {
-  const _MessageBar({super.key});
+  const _MessageBar();
 
   @override
   State<_MessageBar> createState() => __MessageBarState();
