@@ -109,6 +109,37 @@ class __MessageBarState extends State<_MessageBar> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Material(
+      color: Colors.grey[200],
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  maxLines: null, // 複数行入力可能にする
+                  autofocus: true, // ページを開いた際に自動的にフォーカスする
+                  controller: _textEditingController,
+                  decoration: const InputDecoration(
+                    hintText: 'メッセージを入力',
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.all(8),
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () => _submitMessage(),
+                child: const Text('送信'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
+
+  void _submitMessage() {}
 }
