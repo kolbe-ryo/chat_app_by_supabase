@@ -1,3 +1,5 @@
+import 'package:chat_app_by_supabase/pages/chat_page.dart';
+import 'package:chat_app_by_supabase/pages/login_page.dart';
 import 'package:chat_app_by_supabase/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -34,9 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final username = _usernameController.text;
     try {
       await supabase.auth.signUp(email: email, password: password, data: {'username': username});
-      // TODO: チャットページ実装後に下記コードを追加
-      // Navigator.of(context)
-      //     .pushAndRemoveUntil(ChatPage.route(), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(ChatPage.route(), (route) => false);
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
     } catch (error) {
@@ -110,8 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
             formSpacer,
             TextButton(
               onPressed: () {
-                // TODO: ログインページが実装できたらコメントを外す
-                // Navigator.of(context).push(LoginPage.route());
+                Navigator.of(context).push(LoginPage.route());
               },
               child: const Text('すでにアカウントをお持ちの方はこちら'),
             )
