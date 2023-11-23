@@ -289,7 +289,7 @@ packages:
     source: hosted
     version: "2.1.6"
   postgrest:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: postgrest
       sha256: f190eddc5779842dfa529fa239ec4b1025f6f968c18052ba6fffc0aecac93e6b
