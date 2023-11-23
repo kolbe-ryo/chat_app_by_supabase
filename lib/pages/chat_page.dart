@@ -2,6 +2,7 @@ import 'package:chat_app_by_supabase/model/message.dart';
 import 'package:chat_app_by_supabase/pages/register_page.dart';
 import 'package:chat_app_by_supabase/util/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:postgrest/postgrest.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -141,5 +142,24 @@ class __MessageBarState extends State<_MessageBar> {
     );
   }
 
-  void _submitMessage() {}
+  void _submitMessage() async {
+    final text = _textEditingController.text;
+    final myUserId = supabase.auth.currentUser!.id;
+    if (text.isEmpty) {
+      // 入力された文字がなければ何もしない
+      return;
+    }
+    _textEditingController.clear();
+
+    try {
+      await supabase.from(messageTableName).insert({
+        'profile_id': myUserId,
+        'content': text,
+      });
+    } on PostgrestException catch (e) {
+      context.showErrorSnackBar(message: e.message);
+    } catch (_) {
+      context.showErrorSnackBar(message: unexpectedErrorMessage);
+    }
+  }
 }
