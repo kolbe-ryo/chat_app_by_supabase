@@ -74,7 +74,7 @@ class _ChatPageState extends State<ChatPage> {
                           },
                         ),
                 ),
-                // ここに後でメッセージ送信ウィジェットを追加
+                const _MessageBar(),
               ],
             );
           } else {
