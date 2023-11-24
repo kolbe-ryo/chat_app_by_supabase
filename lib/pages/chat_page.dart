@@ -1,4 +1,5 @@
 import 'package:chat_app_by_supabase/model/message.dart';
+import 'package:chat_app_by_supabase/model/profile.dart';
 import 'package:chat_app_by_supabase/pages/register_page.dart';
 import 'package:chat_app_by_supabase/util/constants.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,9 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   late final Stream<List<Message>> _messageStream;
+
+  /// プロフィール情報をメモリー内にキャッシュしておくための変数
+  final Map<String, Profile> _profileCache = {};
 
   @override
   void initState() {
@@ -167,9 +171,11 @@ class __MessageBarState extends State<_MessageBar> {
 class _ChatBubble extends StatelessWidget {
   const _ChatBubble({
     required this.message,
+    required this.profile,
   });
 
   final Message message;
+  final Profile? profile;
 
   @override
   Widget build(BuildContext context) {
