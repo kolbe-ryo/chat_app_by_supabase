@@ -55,8 +55,7 @@ class _ChatPageState extends State<ChatPage> {
 
   /// 特定のユーザーのプロフィール情報をロードしてキャッシュする（キャッシュしないと毎回取りに行って非効率だからこの処理）
   Future<void> _loadProfileCache(String profileId) async {
-    // すでにキャッシュされていれば何もしない
-    if (_profileCache[profileId] != null) {
+    if (_profileCache.containsKey(profileId)) {
       return;
     }
     final data = await supabase
