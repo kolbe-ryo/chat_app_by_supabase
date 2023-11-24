@@ -33,6 +33,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     final userId = supabase.auth.currentUser!.id;
+    // Streamの設定
     _messageStream = supabase
         .from(messageTableName)
         .stream(
@@ -42,7 +43,26 @@ class _ChatPageState extends State<ChatPage> {
         .map((maps) {
           return maps.map((map) => Message.fromMap(map: map, myUserId: userId)).toList();
         });
+
+    // Subscriptionの設定
+    _messagesSubscription = _messageStream.listen((messages) {
+      for (final message in messages) {
+        //TODO ユーザーを
+      }
+    });
     super.initState();
+  }
+
+  /// 特定のユーザーのプロフィール情報をロードしてキャッシュする
+  Future<void> _loadProfileCache(String profileId) async {
+    if (_profileCache[profileId] != null) {
+      return;
+    }
+    final data = await supabase.from('profiles').select().eq('id', profileId).single();
+    final profile = Profile.fromMap(data);
+    setState(() {
+      _profileCache[profileId] = profile;
+    });
   }
 
   @override
