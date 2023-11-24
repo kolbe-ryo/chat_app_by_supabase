@@ -47,18 +47,26 @@ class _ChatPageState extends State<ChatPage> {
     // Subscriptionの設定
     _messagesSubscription = _messageStream.listen((messages) {
       for (final message in messages) {
-        //TODO ユーザーを
+        _loadProfileCache(message.profileId);
       }
     });
     super.initState();
   }
 
-  /// 特定のユーザーのプロフィール情報をロードしてキャッシュする
+  /// 特定のユーザーのプロフィール情報をロードしてキャッシュする（キャッシュしないと毎回取りに行って非効率だからこの処理）
   Future<void> _loadProfileCache(String profileId) async {
+    // すでにキャッシュされていれば何もしない
     if (_profileCache[profileId] != null) {
       return;
     }
-    final data = await supabase.from('profiles').select().eq('id', profileId).single();
+    final data = await supabase
+        .from('profiles')
+        .select()
+        .eq(
+          'id',
+          profileId,
+        )
+        .single();
     final profile = Profile.fromMap(data);
     setState(() {
       _profileCache[profileId] = profile;
@@ -100,7 +108,10 @@ class _ChatPageState extends State<ChatPage> {
                           itemCount: messages.length,
                           itemBuilder: (context, index) {
                             final message = messages[index];
-                            return _ChatBubble(message: message);
+                            return _ChatBubble(
+                              message: message,
+                              profile: _profileCache[message.profileId],
+                            );
                           },
                         ),
                 ),
