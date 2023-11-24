@@ -70,7 +70,7 @@ class _ChatPageState extends State<ChatPage> {
                           itemCount: messages.length,
                           itemBuilder: (context, index) {
                             final message = messages[index];
-                            return Text(message.content);
+                            return _ChatBubble(message: message);
                           },
                         ),
                 ),
@@ -161,5 +161,18 @@ class __MessageBarState extends State<_MessageBar> {
     } catch (_) {
       context.showErrorSnackBar(message: unexpectedErrorMessage);
     }
+  }
+}
+
+class _ChatBubble extends StatelessWidget {
+  const _ChatBubble({
+    required this.message,
+  });
+
+  final Message message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(message.content);
   }
 }
