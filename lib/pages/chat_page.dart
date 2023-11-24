@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chat_app_by_supabase/model/message.dart';
 import 'package:chat_app_by_supabase/model/profile.dart';
 import 'package:chat_app_by_supabase/pages/register_page.dart';
@@ -19,10 +21,14 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  /// メッセージをロードするためのストリーム
   late final Stream<List<Message>> _messageStream;
 
   /// プロフィール情報をメモリー内にキャッシュしておくための変数
   final Map<String, Profile> _profileCache = {};
+
+  /// メッセージのサブスクリプション
+  late final StreamSubscription<List<Message>> _messagesSubscription;
 
   @override
   void initState() {
