@@ -10,6 +10,7 @@ class RegisterPage extends StatefulWidget {
   static Route<void> route({bool isRegistering = false}) {
     return MaterialPageRoute(
       builder: (context) => const RegisterPage(),
+      settings: const RouteSettings(name: 'RegisterPage'),
     );
   }
 

@@ -6,7 +6,10 @@ class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   static Route<void> route() {
-    return MaterialPageRoute(builder: (context) => const LoginPage());
+    return MaterialPageRoute(
+      builder: (context) => const LoginPage(),
+      settings: const RouteSettings(name: 'LoginPage'),
+    );
   }
 
   @override
