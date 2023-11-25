@@ -215,6 +215,18 @@ class _ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(message.content);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
+      child: Row(
+        children: [
+          if (!message.isMine) // 自分のメッセージでない時のみプロフィールアイコンを表示
+            CircleAvatar(
+              child: profile == null ? preloader : Text(profile!.username.substring(0, 2)),
+            ),
+          const SizedBox(width: 12),
+          Text(message.content),
+        ],
+      ),
+    );
   }
 }
