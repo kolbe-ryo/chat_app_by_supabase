@@ -28,6 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _usernameController = TextEditingController();
 
   Future<void> _signUp() async {
+    final navigator = Navigator.of(context);
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
@@ -37,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final username = _usernameController.text;
     try {
       await supabase.auth.signUp(email: email, password: password, data: {'username': username});
-      Navigator.of(context).pushAndRemoveUntil(ChatPage.route(), (route) => false);
+      navigator.pushAndRemoveUntil(ChatPage.route(), (route) => false);
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
     } catch (error) {
