@@ -297,7 +297,7 @@ packages:
     source: hosted
     version: "2.1.6"
   postgrest:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: postgrest
       sha256: f190eddc5779842dfa529fa239ec4b1025f6f968c18052ba6fffc0aecac93e6b
@@ -462,7 +462,7 @@ packages:
     source: hosted
     version: "1.11.11"
   supabase_flutter:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: supabase_flutter
       sha256: "8d68a4fa3215bc23811469fc3499c3895ebb35a2363d6edcfffaa426d5effd84"
@@ -486,7 +486,7 @@ packages:
     source: hosted
     version: "0.4.16"
   timeago:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: timeago
       sha256: c44b80cbc6b44627c00d76960f2af571f6f50e5dbedef4d9215d455e4335165b
