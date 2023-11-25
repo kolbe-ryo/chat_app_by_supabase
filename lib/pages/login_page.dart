@@ -1,3 +1,4 @@
+import 'package:chat_app_by_supabase/pages/chat_page.dart';
 import 'package:chat_app_by_supabase/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -22,6 +23,7 @@ class LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
 
   Future<void> _signIn() async {
+    final navigator = Navigator.of(context);
     setState(() {
       _isLoading = true;
     });
@@ -30,10 +32,8 @@ class LoginPageState extends State<LoginPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      // TODO: チャットページ実装後に下記コードを追加
       // ログイン後にチャットページに飛ぶ
-      // Navigator.of(context)
-      //     .pushAndRemoveUntil(ChatPage.route(), (route) => false);
+      navigator.pushAndRemoveUntil(ChatPage.route(), (route) => false);
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
     } catch (_) {
